@@ -3,14 +3,12 @@ from SimpleAction import TestSettings
 import unittest
 import os
 from Helpers import Helpers
+import pytest
+import allure
 
 
-# import pytest
-# import allure
-
-
-class TestReg(unittest.TestCase):
-    def setUp(self):
+class TestReg:
+    def setup_method(self):
         chrome_path = r"D:\My Files\Project\MyFirstProject\chromedriver_win32\chromedriver.exe"
         self.driver = webdriver.Chrome(chrome_path)  # Инициализация веб-драйвера
         self.driver.maximize_window()  # выставление максимального размера окна
@@ -36,9 +34,5 @@ class TestReg(unittest.TestCase):
         assert "Введите действующий адрес электронной почты." in self.driver.page_source
         self.driver.get_screenshot_as_file(TestSettings.TakeScreenshot(newpath))
 
-    def tearDown(self):
+    def teardown_method(self):
         self.driver.close()
-
-
-if __name__ == '__main__':
-    unittest.main()
